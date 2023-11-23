@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <script src = "https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+        <script src = "https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+        <script src = "https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+        <script src = "https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
+        <script src = "https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+        <script src = "Shoot.js"></script>
+
+    </head>
+
+    <body>
+
+        <a-scene id = "scene" inspector-plugin-recast>
+
+            <a-assets>
+
+                <a-asset-item id = "gun" src = "model/gun.gltf"></a-asset-item>
+                <a-asset-item id = "collider" src = "navmesh.gltf"></a-asset-item>
+ 
+                <audio id = "shoot" src = "sound/shoot.mp3"></audio>
+                <audio id = "foot-step" src = "sound/footStep.mp3"></audio>
+
+            </a-assets>
+
+            <a-entity 
+            id = "environment"
+            environment = "preset : default; skyType : gradient; lighting : point;"></a-entity>
+
+            <a-entity
+            id = "sound1"
+            sound = "src : #shoot; poolSize : 2; autoplay : false; volume : 1; loop : false;"></a-entity>
+
+            <a-entity
+            id = "sound2"
+            sound = "src : #foot-step; poolSize : 2; autoplay : false; volume : 4; loop : false;"></a-entity>
+
+            <a-entity
+            id = "navigation-mesh"
+            gltf-model = "#collider" visible = "false" nav-mesh></a-entity>
+ 
+            <a-entity id = "camera-rig" movement-controls = "speed : 0.2; constrainToNavMesh : true;" position = "0 0 5">
+
+                <a-entity id = "camera" camera position = "0 1.5 0"
+                look-controls = "pointerLockEnabled : false;">
+            
+                    <a-entity id = "weapon" gltf-model = "#gun"
+                    position = "0 -4.4 3" rotation = "0 180 0" scale = "0.40 1 1"></a-entity>
+
+                    <a-cursor></a-cursor>
+            
+                </a-entity>
+
+            </a-entity>
+
+            <a-entity light = "type : ambient; color : white; intensity : 0.5;"></a-entity>
+            <a-entity light = "type : directional; color : #EEE; intensity : 1;" position = "-1 1 0"></a-entity>
+
+            <a-entity bullets></a-entity>
+
+            <a-plane 
+            id = "ground"
+            position = "0 0 0"
+            height = "200"
+            width = "200"
+            static-body
+            rotation = "-90 0 0"
+            visible = "false"></a-plane>
+
+            <a-box
+            id = "right-wall"
+            color = "red"
+            position = "25 5 -25"
+            width = "50"
+            height = "10"
+            static-body
+            rotation = "0 -90 0"></a-box>
+
+            <a-box
+            id = "left-wall"
+            color = "red"
+            position = "-25 5 -25"
+            width = "50"
+            height = "10"
+            static-body
+            rotation = "0 -90 0"></a-box>
+
+            <a-box
+            id = "back-wall"
+            color = "red"
+            position = "0 5 -40"
+            width = "50"
+            height = "10"
+            static-body></a-box>
+
+            <a-entity>
+
+                <a-plane
+                id = "wall1"
+                height = "4"
+                width = "10"
+                position = "0 1 -10"
+                static-body></a-plane>
+
+                <a-plane
+                id = "wall2"
+                height = "4"
+                width = "10"
+                position = "10 1 -7"
+                color = "grey"
+                static-body></a-plane>
+
+                <a-plane
+                id = "wall3"
+                height = "4"
+                width = "10"
+                position = "-13 1 -12"
+                color = "orange"
+                static-body></a-plane>
+
+                <a-plane
+                id = "wall4"
+                height = "4"
+                width = "10"
+                position = "-8 1 -16"
+                color = "red"
+                static-body></a-plane>
+
+                <a-plane
+                id = "wall5"
+                height = "4"
+                width = "10"
+                position = "3 1 -20"
+                color = "black"
+                static-body></a-plane>
+
+                <a-plane
+                id = "wall6"
+                height = "4"
+                width = "10"
+                position = "9 1 -23"
+                color = "tomato"
+                static-body></a-plane>
+
+                <a-plane
+                id = "wall7"
+                height = "4"
+                width = "10"
+                position = "14 1 -16"
+                color = "brown"
+                static-body></a-plane>
+
+                <a-plane
+                id = "wall8"
+                height = "4"
+                width = "10"
+                position = "-15 1 -27"
+                color = "blue"
+                static-body></a-plane>
+
+            </a-entity>
+
+        </a-scene>
+
+    </body>
+
+</html>
